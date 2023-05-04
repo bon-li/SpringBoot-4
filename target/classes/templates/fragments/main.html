@@ -1,0 +1,46 @@
+<!-- 
+Name: Bonita Li
+Assignment: Assignment 4
+Date: August 17, 2022
+
+Description: Main fragment used for all html pages.
+ -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../css/stylesheet.css" th:href="@{/css/stylesheet.css}">
+</head>
+<body>
+	
+	<!-- Header section of the page -->
+	<div th:fragment="mainHeader(message)">
+		<h1>WeHelp Charity Events</h1>
+		<h2 th:text="${message}"></h2>
+		<nav>
+			<a th:unless="${page == 'mainIndex'}" 
+				th:href="@{/}">Home</a>
+			<a th:unless="${page == 'addTransc' || page == 'loginPage' || page == 'deniedPage'}" 
+				th:href="@{/add}">Add</a>
+			<a th:unless="${page == 'transcList' || page == 'loginPage' || page == 'deniedPage'}" 
+				th:href="@{/list}">Transactions</a>
+			<a th:unless="${page == 'loginPage'}" sec:authorize="!(isAuthenticated())" 
+				th:href="@{/login}">Login</a>
+			<a sec:authorize="isAuthenticated()" 
+				th:href="@{/logout}">Logout</a>
+		</nav>
+	</div>
+
+	<!-- Footer section of the page -->
+	<div th:fragment="mainFooter(year)">
+		<address>&copy; 
+			<span th:text="${year}">2000</span> Wendi Jollymore
+		</address>
+		<div sec:authorize="isAuthenticated()">Logged in as 
+		<span sec:authentication="name"></span></div>
+		
+	</div>
+</body>
+</html>

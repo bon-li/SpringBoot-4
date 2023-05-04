@@ -1,0 +1,44 @@
+<!-- 
+Name: Bonita Li
+Assignment: Assignment 4
+Date: August 17, 2022
+
+Description: Page for adding new transaction.
+ -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>WeHelp: Add Transaction</title>
+<link rel="stylesheet" href="../css/stylesheet.css" th:href="@{/css/stylesheet.css}">	
+</head>
+<body>
+
+	<!-- Header section of the page -->
+	<header th:insert="fragments/main.html :: mainHeader (${message})"></header>
+	
+	<!-- Form for adding new transaction -->
+	<form th:action="@{/addnew}" method="post" th:object="${transaction}">
+		<p><label for="events">Event:
+			<select id="events" name="event" th:field="*{event}">
+				<option th:each="e : ${events}" th:value="${e.id}" th:text="${e.eventName}"></option>
+			</select>
+		</label>
+		</p>
+		<p><label for="num">Number of Tickets:
+			<input type="number" value="4" min="1" id="num" name="numTickets" th:field="*{numTickets}"required>
+		</label>
+		</p>
+		<p><label for="email">Contact Email:
+			<input type="email" id="email" name="contact" th:field="*{contact}" required>
+		</label>
+		</p>
+		<p><input type="submit"></p>
+	</form>
+	
+	<!-- Footer section of the page -->	
+	<footer th:insert="fragments/main.html :: mainFooter (${year})"></footer>
+	
+</body>
+</html>

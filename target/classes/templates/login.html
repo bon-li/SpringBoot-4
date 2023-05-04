@@ -1,0 +1,39 @@
+<!-- 
+Name: Bonita Li
+Assignment: Assignment 4
+Date: August 17, 2022
+
+Description: Login page for users to be authenticated.
+ -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<meta charset="UTF-8">
+	<title>Login Page</title>
+	<link rel="stylesheet" href="../css/stylesheet.css" th:href="@{/css/stylesheet.css}">
+</head>
+<body>
+
+	<!-- Header section of the page -->
+	<header th:insert="fragments/main.html :: mainHeader (${message})"></header>
+	
+	<!-- Login messages for invalid username/password and logging out-->
+	<div class="warn" th:if="${param.error}">Invalid username or password.</div>
+	<div th:if="${param.logout}">You have logged out.</div>
+	
+	<!-- Form section for logging in -->
+	<form method="post" th:action="@{/login}">
+		<p><label for="username">Username:
+			<input type="text" id="username" name="username" required>
+		</label></p>
+		<p><label for="pw">Password:
+			<input type="password" id="pw" name="password" required>
+		</label></p>
+		<p><input type="submit" name="login" value="Log In"></p>
+	</form>
+	
+	<!-- Footer section of the page -->
+	<footer th:insert="fragments/main.html :: mainFooter (${year})"> </footer>
+</body>
+</html>

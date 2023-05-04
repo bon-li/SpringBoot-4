@@ -1,0 +1,39 @@
+<!-- 
+Name: Bonita Li
+Assignment: Assignment 4
+Date: August 17, 2022
+
+Description: Page for listing all transactions in database.
+ -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>WeHelp: Add Transaction</title>
+	<link rel="stylesheet" href="../css/stylesheet.css" th:href="@{/css/stylesheet.css}">	
+</head>
+<body>
+
+	<!-- Header section of the page -->
+	<header th:insert="fragments/main.html :: mainHeader (${message})"></header>
+	
+	<!-- Shows text when no transactions. -->
+	<div class="warn" th:if="${rows <= 0}" th:text="'No transactions to view.'">No transactions to view.</div>
+	
+	<!-- Displays all transactions made for all events -->
+	<table th:if="${rows > 0}">
+
+		<tr><th>Event</th><th>#Tickets</th><th>Contact</th></tr>
+		<tr th:each="t : ${transactions}">
+			<td th:text="${events[t.event]}">event name</td>
+			<td th:text="${t.numTickets}">number of tickets</td>
+			<td th:text="${t.contact}">contact info</td>
+		</tr>
+	</table>
+		
+	<!-- Footer section of the page -->	
+	<footer th:insert="fragments/main.html :: mainFooter (${year})"></footer>
+	
+</body>
+</html>
